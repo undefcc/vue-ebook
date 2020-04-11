@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class='home'>
+    <span class="icon-bookmark"></span>
+    <!-- <div id="read"></div> -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Epub from 'epubjs'
+global.ePub = Epub
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+  name: 'home'
+  // mounted () {
+  //   this.book = new Epub('/2017_Book_InterdisciplinaryPerspectivesO.epub')
+  //   // console.log(this.book)
+  //   this.book.renderTo('read', {
+  //     width: window.innerWidth,
+  //     height: window.innerHeight
+  //   }).display()
+  // }
 }
 </script>

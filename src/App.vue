@@ -18,5 +18,7 @@ document.addEventListener('DOMContentLoaded', () => { // 需要刷新
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: #7d8188;
+    overflow: hidden;
   }
 </style>

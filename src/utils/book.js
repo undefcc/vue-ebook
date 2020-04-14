@@ -1,3 +1,5 @@
+import { getReadTime } from './localStorage'
+
 export const FONT_SIZE_LIST = [
     { fontSize: '12px' },
     { fontSize: '14px' },
@@ -108,4 +110,19 @@ export function removeAllCss () {
     removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_eye.css`)
     removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_gold.css`)
     removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_night.css`)
+}
+
+export function getReadTimeByMinute (fileName) {
+    const readTime = getReadTime(fileName)
+    if (!readTime) {
+        return 0
+    } else {
+        return Math.ceil(readTime / 60)
+    }
+}
+
+export function flatten (array) {
+    // return array.map(item => [].concat(item, ...item.subitems))// 只能2级
+    const arr2d = array.map(item => [].concat(item, ...flatten(item.subitems)))// 多级（转成二维数组）
+    return [].concat(...arr2d)// 二维转一维
 }

@@ -20,6 +20,7 @@
         <ebook-setting-font-popup></ebook-setting-font-popup>
         <ebook-setting-theme></ebook-setting-theme>
         <ebook-set-progress></ebook-set-progress>
+        <ebook-slide></ebook-slide>
     </div>
 </template>
 
@@ -28,6 +29,7 @@ import EbookSettingFontPopup from './EbookSettingFontPopup'
 import EbookSettingTheme from './EbookSettingTheme'
 import EbookSettingFont from './EbookSettingFont'
 import EbookSetProgress from './EbookSetProgress'
+import EbookSlide from './EbookSlide'
 import { ebookMixin } from '../../utils/mixin'
 
 export default {
@@ -36,7 +38,8 @@ export default {
         EbookSettingFont,
         EbookSettingFontPopup,
         EbookSettingTheme,
-        EbookSetProgress
+        EbookSetProgress,
+        EbookSlide
     },
     methods: {
         showSetting (key) {
@@ -52,7 +55,7 @@ export default {
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 102;
+    z-index: 202;
     display: flex;
     width: 100%;
     height: px2rem(48);

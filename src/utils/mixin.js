@@ -2,6 +2,24 @@ import { mapGetters, mapActions } from 'vuex'
 import { themeList, addCss, removeAllCss, getReadTimeByMinute } from './book'
 import { saveLocation, getBookmark } from './localStorage'
 
+export const storeHomeMixin = {
+    computed: {
+        ...mapGetters([
+            'offsetY',
+            'hotSearchOffsetY',
+            'flapCardVisible'
+        ])
+    },
+    methods: {
+        ...mapActions([
+            'setOffsetY',
+            'setHotSearchOffsetY',
+            'setFlapCardVisible'
+        ]),
+        showBookDetail (book) {}
+    }
+}
+
 export const ebookMixin = {
     computed: {
         ...mapGetters([
@@ -28,6 +46,15 @@ export const ebookMixin = {
         ]),
         themeList () {
             return themeList(this)
+        },
+        getSectionName () {
+          if (this.section) {
+            const section = this.currentBook.section(this.section)
+            if (section && section.href && this.currentBook && this.currentBook.navigation) {
+              // return this.currentBook.navigation.get(section.href).label
+              return this.navigation[this.section].label
+            }
+          }
         }
     },
     methods: {

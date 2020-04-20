@@ -4,10 +4,12 @@ import router from './router'
 import store from './store'
 // import VConsole from 'vconsole'
 import i18n from './lang'
-import './mock'
+// import './mock'
+import './utils/create-api'
 import './assets/styles/icon.css'
 import './assets/fonts/daysOne.css'
 import './assets/styles/global.scss'
+import './utils/boost'
 
 /* eslint-disable no-new */
 // new VConsole()

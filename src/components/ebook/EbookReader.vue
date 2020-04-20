@@ -16,6 +16,7 @@ import Epub from 'epubjs'
 import { ebookMixin } from '../../utils/mixin'
 import { getFontFamily, saveFontFamily, getFontSize, saveFontSize, saveTheme, getTheme, getLocation } from '../../utils/localStorage'
 import { flatten } from '../../utils/book'
+import { getLocalForage } from '../../utils/localForage'
 global.ePub = Epub
 
 export default {
@@ -164,6 +165,16 @@ export default {
             contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/tangerine.css`)
           ]).then(() => {
             // console.log('字体加载完毕')
+            if (this.$route.query.navigation) {
+                this.display(this.$route.query.navigation)
+            } else {
+                const location = getLocation(this.fileName)
+                if (location) {
+                this.display(location)
+                } else {
+                this.display()
+                }
+            }
           })
       })
     },
@@ -209,9 +220,7 @@ export default {
             this.setNavigation(navItem)// 传给vuex
         })
     },
-    initEpub () {
-      const url = process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub' // nginx 资源地址
-      // console.log(url)
+    initEpub (url) {
       this.book = new Epub(url)
       // console.log(this.book)
       this.setCurrentBook(this.book)
@@ -230,10 +239,23 @@ export default {
     }
   },
   mounted () {
-    const fileName = this.$route.params.fileName.split('|').join('/')
-    // this.$store.dispatch('setFileName', fileName)
-    this.setFileName(fileName).then(() => {
-      this.initEpub()
+    const books = this.$route.params.fileName.split('|')
+    const fileName = books[1]
+    getLocalForage(fileName, (err, blob) => {
+        if (!err && blob) {
+            // console.log('找到离线缓存电子书', fileName)
+            this.setFileName(books.join('/')).then(() => {
+                this.initEpub(blob)
+            })
+        } else {
+            // console.log('无离线缓存，将在线获取电子书')
+            // this.$store.dispatch('setFileName', fileName)
+            this.setFileName(books.join('/')).then(() => {
+            const url = process.env.VUE_APP_EPUB_URL + '/' + this.fileName + '.epub' // nginx 资源地址
+            // console.log(url)
+            this.initEpub(url)
+            })
+        }
     })
   }
 }

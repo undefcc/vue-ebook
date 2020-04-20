@@ -319,6 +319,7 @@ export default {
             .content-wrapper {
                 padding: 0 px2rem(20);
                 margin-top: px2rem(20);
+                margin-bottom: px2rem(20);
                 .title {
                     color: #333;
                     font-weight: bold;
@@ -331,6 +332,7 @@ export default {
                 .author {
                     margin-top: px2rem(10);
                     text-align: center;
+                    font-size: px2rem(12);
                 }
                 .category {
                     color: #999;

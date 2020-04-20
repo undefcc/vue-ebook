@@ -8,8 +8,8 @@ $ratio: 375 / 10;
 
 @mixin center {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;// 水平
+    align-items: center;// 垂直
 }
 
 @mixin absCenter {
@@ -19,6 +19,12 @@ $ratio: 375 / 10;
     right: 0;
     bottom: 0;
     margin: auto;
+}
+
+@mixin top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 @mixin left {
@@ -33,10 +39,23 @@ $ratio: 375 / 10;
     align-items: center;
 }
 
+@mixin leftBottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
 @mixin columnTop {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
+}
+
+@mixin columnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
